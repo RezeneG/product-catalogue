@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Catalogue</title>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .filter-container {
+      max-width: 800px;
+      margin: 0 auto 20px auto;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-right: 6px;
+    }
+
+    select,
+    #searchInput {
+      padding: 8px 12px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      min-width: 180px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .product h3 {
+      margin: 0 0 5px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .product p {
+      margin: 5px 0;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+    }
+
+    .status i {
+      margin-right: 6px;
+    }
+
+    .rating {
+      color: #ff9900;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .review {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .no-results {
+      text-align: center;
+      font-size: 18px;
+      color: #666;
+      grid-column: 1 / -1;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Product Catalogue</h1>
+
+  <div class="filter-container">
+    <div>
+      <label for="categoryFilter">Category:</label>
+      <select id="categoryFilter">
+        <option value="all">All Categories</option>
+        <option value="audio">Audio</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="wearables">Wearables</option>
+        <option value="smart-home">Smart Home</option>
+        <option value="accessories">Accessories</option>
+        <option value="health">Health</option>
+        <option value="gaming">Gaming</option>
+        <option value="camera">Camera</option>
+        <option value="vr">VR</option>
+        <option value="office">Office</option>
+        <option value="mobile">Mobile</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="sortProducts">Sort by:</label>
+      <select id="sortProducts">
+        <option value="name">Name (A → Z)</option>
+        <option value="price">Price (Low → High)</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="searchInput">Search:</label>
+      <input type="text" id="searchInput" placeholder="Enter keyword..." />
+    </div>
+  </div>
+
+  <div class="product-grid" id="productGrid">
+
+    <div class="product" data-category="audio" data-price="59.99">
+      <h3>Wireless Headphones</h3>
+      <p>£59.99</p>
+      <p class="status" data-stock="in"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <div class="product" data-category="vr" data-price="349.99">
+      <h3>VR Headset</h3>
+      <p>£349.99</p>
+      <p class="status" data-stock="out"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <div class="product" data-category="kitchen" data-price="129.50">
+      <h3>Smart Blender</h3>
+      <p>£129.50</p>
+      <p class="status" data-stock="in"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <div class="product" data-category="wearables" data-price="199.00">
+      <h3>Fitness Tracker</h3>
+      <p>£199.00</p>
+      <p class="status" data-stock="in"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <div class="product" data-category="smart-home" data-price="89.99">
+      <h3>Smart Light Bulb</h3>
+      <p>£89.99</p>
+      <p class="status" data-stock="in"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <div class="product" data-category="accessories" data-price="25.00">
+      <h3>Charging Cable</h3>
+      <p>£25.00</p>
+      <p class="status" data-stock="in"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <div class="product" data-category="health" data-price="299.99">
+      <h3>Smart Blood Pressure Monitor</h3>
+      <p>£299.99</p>
+      <p class="status" data-stock="out"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <div class="product" data-category="gaming" data-price="499.99">
+      <h3>Gaming Console</h3>
+      <p>£499.99</p>
+      <p class="status" data-stock="in"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <!-- New Products Added Below -->
+
+    <div class="product" data-category="camera" data-price="799.00">
+      <h3>Mirrorless Camera</h3>
+      <p>£799.00</p>
+      <p class="status" data-stock="in"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <div class="product" data-category="office" data-price="149.99">
+      <h3>Ergonomic Keyboard</h3>
+      <p>£149.99</p>
+      <p class="status" data-stock="in"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <div class="product" data-category="mobile" data-price="699.99">
+      <h3>Smartphone Pro Max</h3>
+      <p>£699.99</p>
+      <p class="status" data-stock="out"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <div class="product" data-category="accessories" data-price="45.00">
+      <h3>Wireless Mouse</h3>
+      <p>£45.00</p>
+      <p class="status" data-stock="in"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <div class="product" data-category="audio" data-price="129.00">
+      <h3>Bluetooth Speaker</h3>
+      <p>£129.00</p>
+      <p class="status" data-stock="in"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <div class="product" data-category="smart-home" data-price="159.99">
+      <h3>Smart Thermostat</h3>
+      <p>£159.99</p>
+      <p class="status" data-stock="out"></p>
+      <p class="rating">Rating: ...</p>
+      <div class="review">Loading reviews...</div>
+    </div>
+
+    <div class="product" data-category="accessories" data-price="39.99">
+    <h3>Wireless Charger</h3>
+    <p>£39.99</p>
+    <p class="status" data-stock="in"></p>
+    <p class="rating">Rating: ...</p>
+    <div class="review">Loading reviews...</div>
+    </div>
+
+  </div>
+
+  <div id="noResultsMessage" class="no-results" style="display:none;">
+    No products found matching your search.
+  </div>
+
+  <script>
+    const reviews = {
+      "Wireless Headphones": {
+        rating: 4.5,
+        comments: ["Excellent sound quality", "Very comfortable", "Battery lasts long"]
+      },
+      "VR Headset": {
+        rating: 3.7,
+        comments: ["Immersive experience", "Comfortable fit", "Expensive"]
+      },
+      "Smart Blender": {
+        rating: 4.2,
+        comments: ["Powerful motor", "Easy to clean", "Quiet operation"]
+      },
+      "Fitness Tracker": {
+        rating: 4.0,
+        comments: ["Tracks well", "Motivates to move", "Good battery life"]
+      },
+      "Smart Light Bulb": {
+        rating: 3.9,
+        comments: ["Easy to install", "Bright light", "Works with voice assistant"]
+      },
+      "Charging Cable": {
+        rating: 4.6,
+        comments: ["Fast charging", "Durable cable", "Affordable price"]
+      },
+      "Smart Blood Pressure Monitor": {
+        rating: 3.8,
+        comments: ["Accurate readings", "Simple interface", "Bulkier than expected"]
+      },
+      "Gaming Console": {
+        rating: 4.7,
+        comments: ["Great graphics", "Wide game selection", "Responsive controller"]
+      },
+      "Mirrorless Camera": {
+        rating: 4.4,
+        comments: ["High resolution", "Lightweight body", "Excellent zoom"]
+      },
+      "Ergonomic Keyboard": {
+        rating: 4.3,
+        comments: ["Comfortable typing", "Reduces strain", "Stylish design"]
+      },
+      "Smartphone Pro Max": {
+        rating: 4.6,
+        comments: ["Amazing camera", "Smooth performance", "Expensive"]
+      },
+      "Wireless Mouse": {
+        rating: 4.1,
+        comments: ["Responsive", "Comfortable grip", "Good battery life"]
+      },
+      "Bluetooth Speaker": {
+        rating: 4.5,
+        comments: ["Loud and clear", "Portable", "Long battery life"]
+      },
+      "Smart Thermostat": {
+        rating: 3.9,
+        comments: ["Easy setup", "Saves energy", "App control is handy"]
+      },
+      "Wireless Charger": {
+       rating: 4.3,
+       comments: ["Fast charging", "Compact design", "Works with many devices"]
+      }
+
+    };
+
+    const starHTML = (rating) => {
+      const full = Math.floor(rating);
+      const half = rating % 1 >= 0.5;
+      let stars = '';
+
+      for (let i = 0; i < full; i++) stars += '<i class="fas fa-star"></i>';
+      if (half) stars += '<i class="fas fa-star-half-alt"></i>';
+      for (let i = full + half; i < 5; i++) stars += '<i class="far fa-star"></i>';
+
+      return stars;
+    };
+
+    window.onload = function () {
+      const productsContainer = document.getElementById("productGrid");
+      const products = Array.from(productsContainer.querySelectorAll(".product"));
+      const categoryFilter = document.getElementById("categoryFilter");
+      const sortSelect = document.getElementById("sortProducts");
+      const searchInput = document.getElementById("searchInput");
+      const noResultsMessage = document.getElementById("noResultsMessage");
+
+      products.forEach(product => {
+        const name = product.querySelector("h3").innerText;
+        const ratingEl = product.querySelector(".rating");
+        const reviewEl = product.querySelector(".review");
+        const stockEl = product.querySelector(".status");
+
+        const inStock = stockEl.getAttribute("data-stock") === "in";
+        stockEl.innerHTML = inStock
+          ? '<i class="fas fa-check-circle" style="color:green;"></i> In Stock'
+          : '<i class="fas fa-times-circle" style="color:red;"></i> Out of Stock';
+
+        if (reviews[name]) {
+          const rating = reviews[name].rating;
+          const comments = reviews[name].comments;
+          ratingEl.innerHTML = `Rating: ${starHTML(rating)} (${rating.toFixed(1)})`;
+          reviewEl.innerHTML = comments.map(c => `• ${c}`).join("<br>");
+        } else {
+          ratingEl.innerHTML = "Rating: N/A";
+          reviewEl.textContent = "No reviews yet.";
+        }
+      });
+
+      function filterAndSortProducts() {
+        const selectedCategory = categoryFilter.value;
+        const selectedSort = sortSelect.value;
+        const searchTerm = searchInput.value.toLowerCase().trim();
+
+        let visibleProducts = [];
+
+        products.forEach(product => {
+          const productCategory = product.getAttribute("data-category");
+          const name = product.querySelector("h3").innerText.toLowerCase();
+          const review = product.querySelector(".review").innerText.toLowerCase();
+
+          const matchesCategory = selectedCategory === "all" || productCategory === selectedCategory;
+          const matchesSearch = name.includes(searchTerm) || review.includes(searchTerm);
+
+          if (matchesCategory && matchesSearch) {
+            product.style.display = "";
+            visibleProducts.push(product);
+          } else {
+            product.style.display = "none";
+          }
+        });
+
+        noResultsMessage.style.display = visibleProducts.length === 0 ? "block" : "none";
+
+        visibleProducts.sort((a, b) => {
+          if (selectedSort === "name") {
+            const nameA = a.querySelector("h3").innerText.toLowerCase();
+            const nameB = b.querySelector("h3").innerText.toLowerCase();
+            return nameA.localeCompare(nameB);
+          } else if (selectedSort === "price") {
+            const priceA = parseFloat(a.getAttribute("data-price"));
+            const priceB = parseFloat(b.getAttribute("data-price"));
+            return priceA - priceB;
+          }
+          return 0;
+        });
+
+        visibleProducts.forEach(product => productsContainer.appendChild(product));
+      }
+
+      categoryFilter.addEventListener("change", filterAndSortProducts);
+      sortSelect.addEventListener("change", filterAndSortProducts);
+      searchInput.addEventListener("input", filterAndSortProducts);
+
+      filterAndSortProducts(); // Initial render
+    };
+  </script>
+
+  <footer style="text-align:center; padding:15px 0; font-size:14px; color:#666; border-top:1px solid #ddd; margin-top:40px;">
+    &copy; 2025 Rezene Ghebrehiwot (Learner ID: 2415644). All rights reserved.
+  </footer>
+
+</body>
+</html>
