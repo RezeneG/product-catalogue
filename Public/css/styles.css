@@ -1,171 +1,73 @@
-/* Reset + Base */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f4f4f4;
-  color: #333;
-  transition: background 0.3s, color 0.3s;
-}
-
-h1, h3, p {
-  margin: 0.5em 0;
-}
-
-/* Header */
-header {
-  background-color: #ffffff;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-/* Product Grid */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
-}
-
-/* Product Card */
-.product-card {
-  background: #fff;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-}
-
-/* Image Styling */
-.product-card img {
-  width: 100%;
-  max-height: 200px;
-  object-fit: cover;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-}
-
-/* Category Filter */
-select {
-  padding: 0.5rem;
-  font-size: 1rem;
-  margin: 1rem 2rem;
-}
-
-/* Ratings (Stars) */
-.rating {
+/* Pagination Container */
+.pagination-container {
   display: flex;
   align-items: center;
-  margin: 0.5rem 0;
-}
-.rating span {
-  color: #f5a623; /* gold star color */
-  font-size: 1.2rem;
-  margin-right: 2px;
-  user-select: none;
-}
-.rating .empty-star {
-  color: #ccc;
+  justify-content: center;
+  gap: 8px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Reviews */
-.reviews {
-  width: 100%;
-  margin-top: 0.5rem;
-  max-height: 120px;
-  overflow-y: auto;
-  border-top: 1px solid #eee;
-  padding-top: 0.5rem;
-  font-size: 0.9rem;
-  color: #555;
-}
-.reviews p {
-  margin: 0.25rem 0;
-}
-.reviews strong {
-  color: #333;
-}
-
-/* Dark Mode */
-body.dark-mode {
-  background: #121212;
-  color: #eee;
-}
-body.dark-mode header {
-  background-color: #1e1e1e;
-  color: #eee;
-}
-body.dark-mode .product-card {
-  background: #1e1e1e;
-  border: 1px solid #333;
-}
-body.dark-mode .reviews {
-  border-top: 1px solid #444;
-  color: #ccc;
-}
-
-/* Dark Mode Toggle */
-.switch {
-  display: flex;
-  align-items: center;
-  font-size: 0.9rem;
-  color: inherit;
-}
-.switch input {
-  display: none;
-}
-.slider {
+/* Button Styles */
+.pagination-button,
+.pagination-number {
+  background: transparent;
+  border: none;
+  height: 40px;
   width: 40px;
-  height: 20px;
-  background-color: #ccc;
-  border-radius: 10px;
-  margin-right: 8px;
-  position: relative;
-  transition: 0.4s;
-}
-.slider::before {
-  content: "";
-  position: absolute;
-  height: 16px;
-  width: 16px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-input:checked + .slider {
-  background-color: #4caf50;
-}
-input:checked + .slider::before {
-  transform: translateX(20px);
+  cursor: pointer;
+  border-radius: 6px;
+  color: #374151;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Prev/Next Buttons */
+.pagination-button {
+  color: #374151;
 }
-.fade-in {
-  animation: fadeIn 0.4s ease-in;
+
+.pagination-button:hover:not(:disabled) {
+  background: #f3f4f6;
+}
+
+.pagination-button:disabled {
+  color: #e5e7eb;
+  cursor: not-allowed;
+}
+
+/* Page Number Buttons */
+.pagination-numbers {
+  display: flex;
+  gap: 4px;
+}
+
+.pagination-number {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.pagination-number:hover:not(.active) {
+  background: #f3f4f6;
+}
+
+.pagination-number.active {
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+  cursor: default;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 480px) {
+  .pagination-numbers {
+    gap: 2px;
+  }
+
+  .pagination-button,
+  .pagination-number {
+    height: 36px;
+    width: 36px;
+  }
 }
