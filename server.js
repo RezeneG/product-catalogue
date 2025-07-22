@@ -14,7 +14,11 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ /* your session config */ }));
+app.use(session({
+    secret: 'yourSecret',
+    resave: false,
+    saveUninitialized: true
+}));
 
 // Authentication
 // ... login/logout endpoints ...
@@ -23,7 +27,7 @@ app.use(session({ /* your session config */ }));
 // ... GET /api/products, POST, PUT, DELETE ...
 
 // 🔄 Transaction API
-app.post('/api/transaction', requireLogin, async (req, res) => {
+app.post('/api/transaction', async (req, res) => {
   try {
     const { name } = req.body;
     const newUserId = await performTransaction(name);

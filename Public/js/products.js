@@ -5,37 +5,41 @@ const defaultProducts = [
     name: "Bluetooth Speaker",
     price: 129.00,
     category: "Electronics",
-    image: "./Public/Images/blue-speaker.jpg",
-    rating: 4.5,
+    image: "./Public/Images/bluetooth-speaker.jpg",
+    rating: 4.3,
     stock: "In Stock",
-    features: ["Loud and clear", "Portable", "Long battery life"]
+    description: "Compact speaker with rich bass and wireless connectivity.",
+    reviews: ["Wireless", "Waterproof", "Long battery life"]
   },
   {
     name: "Charging Cable",
     price: 25.00,
-    category: "Accessories",
+    category: "Electronics",
     image: "./Public/Images/charging-cable.jpg",
-    rating: 4.6,
+    rating: 4.1,
     stock: "In Stock",
-    features: ["Fast charging", "Durable cable", "Affordable price"]
+    description: "Durable and fast-charging USB cable compatible with all devices.",
+    reviews: ["Fast charging", "Durable", "Universal compatibility"]
   },
   {
     name: "Ergonomic Keyboard",
     price: 149.99,
-    category: "Accessories",
-    image: "./Public/Images/ergonomic-keyboard.jpg",
-    rating: 4.3,
+    category: "Electronics",
+    image: "./Public/Images/keyboard.jpg",
+    rating: 4.5,
     stock: "In Stock",
-    features: ["Comfortable typing", "Reduces strain", "Stylish design"]
+    description: "Comfortable keyboard designed to reduce wrist strain.",
+    reviews: ["Wrist support", "Responsive keys", "USB-C connection"]
   },
   {
     name: "Fitness Tracker",
     price: 199.00,
-    category: "Electronics",
-    image: "./Public/Images/fitness-tracker.jpeg",
+    category: "Fitness",
+    image: "./Public/Images/fitness-tracker.jpg",
     rating: 4.0,
     stock: "In Stock",
-    features: ["Tracks well", "Motivates to move", "Good battery life"]
+    description: "Track your daily activity, heart rate, and sleep quality.",
+    reviews: ["Tracks well", "Motivates to move", "Good battery life"]
   },
   {
     name: "Gaming Console",
@@ -44,7 +48,28 @@ const defaultProducts = [
     image: "./Public/Images/gaming-console.jpg",
     rating: 4.7,
     stock: "In Stock",
-    features: ["Great graphics", "Wide game selection", "Responsive controller"]
+    description: "Next-gen console with stunning graphics and exclusive games.",
+    reviews: ["Great graphics", "Wide game selection", "Responsive controller"]
+  },
+  {
+    name: "Get Coding",
+    price: 30.00,
+    category: "Books",
+    image: "./Public/Images/get-coding.jpg",
+    rating: 4.9,
+    stock: "In Stock",
+    description: "A handbook of agile software craftsmanship for beginners.",
+    reviews: ["Beginner-friendly", "Hands-on projects", "Covers HTML/CSS/JS"]
+  },
+  {
+    name: "Men's Casual T-Shirt",
+    price: 15.00,
+    category: "Clothing",
+    image: "./Public/Images/tshirt.jpg",
+    rating: 4.2,
+    stock: "In Stock",
+    description: "100% cotton casual t-shirt perfect for everyday wear.",
+    reviews: ["Comfortable", "Breathable", "Machine washable"]
   },
   {
     name: "Mirrorless Camera",
@@ -53,7 +78,18 @@ const defaultProducts = [
     image: "./Public/Images/mirrorless-camera.jpg",
     rating: 4.4,
     stock: "In Stock",
-    features: ["High resolution", "Lightweight body", "4K video recording"]
+    description: "High-resolution mirrorless camera with 4K video support.",
+    reviews: ["High resolution", "Lightweight body", "4K video recording"]
+  },
+  {
+    name: "Pro Django",
+    price: 25.00,
+    category: "Books",
+    image: "./Public/Images/django.jpg",
+    rating: 4.6,
+    stock: "In Stock",
+    description: "Comprehensive guide to Django for building web applications.",
+    reviews: ["Full stack guide", "Best practices", "Advanced techniques"]
   },
   {
     name: "Smart Blender",
@@ -62,7 +98,8 @@ const defaultProducts = [
     image: "./Public/Images/smart-blender.jpg",
     rating: 4.2,
     stock: "In Stock",
-    features: ["Powerful motor", "Easy to clean", "Multiple settings"]
+    description: "Powerful blender with multiple settings and easy cleanup.",
+    reviews: ["Powerful motor", "Easy to clean", "Multiple settings"]
   },
   {
     name: "Smart Blood Pressure Monitor",
@@ -71,7 +108,8 @@ const defaultProducts = [
     image: "./Public/Images/blood-pressure.jpg",
     rating: 3.8,
     stock: "Out of Stock",
-    features: ["Accurate readings", "Bluetooth sync", "Compact size"]
+    description: "Accurate digital blood pressure monitor with Bluetooth sync.",
+    reviews: ["Accurate readings", "Bluetooth sync", "Compact size"]
   },
   {
     name: "Smart Light Bulb",
@@ -80,20 +118,62 @@ const defaultProducts = [
     image: "./Public/Images/smart-lightbulb.jpg",
     rating: 3.9,
     stock: "In Stock",
-    features: ["Easy to install", "Bright light", "Remote control"]
+    description: "",
+    reviews: ["Easy to install", "Bright light", "Remote control"]
   },
   {
     name: "Smart Thermostat",
     price: 159.99,
     category: "Appliances",
     image: "./Public/Images/smart-thermostat.jpg",
-    rating: 3.9,
+    rating: 3,
     stock: "Out of Stock",
-    features: ["Easy setup", "Energy-efficient", "Remote access"]
+    description: "",
+    reviews: ["Easy setup", "Energy-efficient", "Remote access"]
+  },
+  {
+    name: "Pro Django",
+    category: "Books",
+    price: 25,
+    description: "Classic guide for django.",
+    image: "./Public/Images/pro-django.jpg",
+    rating: 4.5,
+    stock: "In Stock",
+    reviews: ["Excellent read", "Handy TOOL", "You have to have it in your bookshelf"]
+  },
+  {
+    name: "Get Coding",
+    category: "Books",
+    price: 30,
+    description: "A handbook of agile software craftsmanship.",
+    image: "./Public/Images/get-coding.jpg",
+    rating: 5,
+    stock: "In Stock",
+    reviews: ["You will code", "Excellent guide", "You must have"]
+  },
+  {
+    name: "LED Desk Lamp",
+    category: "Home",
+    price: 35,
+    description: "Bright LED desk lamp.",
+    image: "./Public/Images/led-desk-lamp.jpg",
+    rating: 2,
+    stock: "In Stock",
+    reviews: ["Poor quality!", "It does what it says", "I would get better quality"]
+  },
+  {
+    name: "Men's Casual T-Shirt",
+    category: "Clothing",
+    price: 15,
+    description: "100% cotton casual wear.",
+    image: "./Public/Images/mens-tshirt.jpg",
+    rating: 4.2,
+    stock: "Out Of Stock",
+    reviews: ["Looks good", "Slim fit & looks good", "Love it"]
   }
 ];
 
-// Safely load products from localStorage or use default
+
 function getStoredProducts() {
   try {
     const stored = localStorage.getItem(PRODUCTS_KEY);
@@ -119,10 +199,9 @@ function loadProducts() {
   saveProductsToStorage(defaultProducts);
   return defaultProducts;
 }
-
 function createProductCard(product) {
   const card = document.createElement("div");
-  card.className = "product-card";
+  card.className = "product";
 
   const stockIcon = product.stock === "In Stock" ? "✅" : "❌";
   const stockColor = product.stock === "In Stock" ? "green" : "red";
@@ -130,12 +209,15 @@ function createProductCard(product) {
   card.innerHTML = `
     <img src="${product.image}" alt="${product.name}" onerror="this.onerror=null; this.src='./Public/Images/default.jpg';" />
     <h3>${product.name}</h3>
+    <p>${product.description || ''}</p>
     <p><strong>£${product.price.toFixed(2)}</strong></p>
     <p style="color: ${stockColor}; font-weight: bold;">${stockIcon} ${product.stock}</p>
     <p>Rating: ⭐ ${product.rating.toFixed(1)}</p>
+    <p><strong>Reviews:</strong></p>
     <ul>
-      ${product.features?.map(f => `<li>${f}</li>`).join("")}
+      ${(product.reviews || []).map(review => `<li>${review}</li>`).join('')}
     </ul>
+    <button class="add-to-cart">Add to Cart</button>
   `;
   return card;
 }
