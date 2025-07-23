@@ -60,6 +60,22 @@
 
     .remove-btn { background: none; color: #ff4136; border: none; font-size: 1.4em; }
 
+    .payment-section {
+      margin-top: 10px;
+    }
+
+    .payment-section label, .payment-section input {
+      display: block;
+      margin-bottom: 8px;
+      width: 100%;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #f1f1f1;
+    }
+
     .pagination-container {
       display: flex;
       justify-content: center;
@@ -81,12 +97,6 @@
       background-color: #007bff;
       color: white;
       font-weight: bold;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #f1f1f1;
     }
   </style>
 </head>
@@ -136,6 +146,39 @@
     <h2>Your Cart</h2>
     <div id="cart-items"></div>
     <div id="cart-total">Total: £0.00</div>
+
+  
+
+<div id="checkout-modal">
+  <h2>Checkout</h2>
+
+  <label for="payment-method">Payment Method:</label>
+  <select id="payment-method">
+    <option value="card">Credit Card</option>
+    <option value="paypal">PayPal</option>
+  </select>
+
+  <label for="payment-details">Card Number:</label>
+  <input type="text" id="payment-details" placeholder="Card Number" required />
+
+  <!-- Insert Expiry Date and CVV fields here -->
+  
+  <label for="expiry-date">Expiry Date (MM/YY):</label>
+  <input type="text" id="expiry-date" placeholder="MM/YY" maxlength="5" required />
+
+  <label for="cvv">CVV:</label>
+  <input type="password" id="cvv" placeholder="123" maxlength="3" required />
+
+  <button id="checkout-btn">Complete Purchase</button>
+</div>
+
+
+      </select>
+
+      <label for="payment-details">Payment Details:</label>
+      <input type="text" id="payment-details" placeholder="Card number or transaction ID">
+    </div>
+
     <button id="checkout-btn">Checkout</button>
   </div>
 </div>
@@ -145,32 +188,31 @@
 </footer>
 
 <script>
-const products = [
-  {id: 1, name: "Bookshelf", category: "home", price: 120, description: "Wooden bookshelf.", image: "bookshelf.jpg", rating: 5},
-  {id: 2, name: "Charging Cable", category: "electronics", price: 10, description: "Fast USB cable.", image: "charging-cable.jpg", rating: 4.5},
-  {id: 3, name: "Smart Watch", category: "electronics", price: 180, description: "Fitness and notifications.", image: "smart-watch.jpg", rating: 5},
-  {id: 4, name: "Yoga Mat", category: "fitness", price: 30, description: "Non-slip mat.", image: "yoga-mat.jpeg", rating: 5},
-  {id: 5, name: "Running Shoes", category: "fitness", price: 95, description: "Lightweight training shoes.", image: "running-shoes.jpg", rating: 5},
-  {id: 6, name: "Wireless Mouse", category: "electronics", price: 25, description: "Ergonomic mouse.", image: "wireless-mouse.jpg", rating: 4},
-  {id: 7, name: "Coffee Maker", category: "home", price: 60, description: "Easy coffee brewing.", image: "coffee-maker.jpg", rating: 4.2},
-  {id: 8, name: "LED Desk Lamp", category: "home", price: 35, description: "Bright LED light.", image: "led-desk-lamp.jpg", rating: 3},
-  {id: 9, name: "Get Coding", category: "books", price: 30, description: "Programming basics.", image: "get-coding.jpg", rating: 5},
-  {id: 10, name: "Men's T-Shirt", category: "clothing", price: 15, description: "Casual wear.", image: "mens-t-shirt.jpg", rating: 4.2},
-  {id: 11, name: "Smart Thermostat", category: "home", price: 150, description: "Control your home's temperature remotely.", image: "smart-thermostat.jpeg", rating:3},
-  {id: 12, name: "Coffee Maker", category: "home", price: 60, description: "Brew your coffee easily.", image: "coffee-maker.jpg", rating: 4.1},
-  {id: 13, name: "Wireless Mouse", category: "electronics", price: 25, description: "Ergonomic wireless mouse.", image: "wireless-mouse.jpg", rating: 4.0},
-  {id: 14, name: "Yoga Mat", category: "fitness", price: 30, description: "Non-slip yoga mat.", image: "yoga-mat.jpeg", rating: 5},
-  {id: 15, name: "Portable Projector", category: "electronics", price: 200, description: "Project videos anywhere.", image: "portable-projector.jpg", rating: 4.4},
-  {id: 16, name: "Laptop Stand", category: "electronics", price: 40, description: "Adjustable laptop stand.", image: "laptop-stand.jpg", rating: 5},
-  {id: 17, name: "LED Desk Lamp", category: "home", price: 35, description: "Bright LED desk lamp.", image: "led-desk-lamp.jpg", rating: 2},
-  {id: 18, name: "Mirrorless Camera", category: "electronics", price: 550, description: "Compact mirrorless camera.", image: "mirrorless-camera.jpg", rating: 5},
-  {id: 19, name: "Bluetooth Speaker", category: "electronics", price: 55, description: "Portable Bluetooth speaker with great sound.", image: "bluetooth-speaker.jpg", rating: 4.3},
-  {id: 20, name: "Running Shoes", category: "fitness", price: 95, description: "Lightweight running shoes for daily training.", image: "running-shoes.jpg", rating: 5},
-  {id: 21, name: "Pro Django", category: "books", price: 25, description: "Classic guide for django.", image: "pro-django.jpg", rating: 5},
-  {id: 22, name: "Get Coding", category: "books", price: 30, description: "A handbook of agile software craftsmanship.", image: "get-coding.jpg", rating: 5},
-  {id: 23, name: "Men's Casual T-Shirt", category: "clothing", price: 15, description: "100% cotton casual wear.", image: "mens-t-shirt.jpg", rating: 4.2},
-  {id: 24, name: "Women's Denim Jacket", category: "clothing", price: 45, description: "Stylish and comfortable jacket.", image: "womens-denim-jacket.jpg", rating: 3}
-  // Add more if needed..
+  const products = [
+      {id: 1, name: "Bookshelf", category: "home", price: 120, description: "Wooden bookshelf for your living room.", image: "bookshelf.jpg", rating: 5},
+      {id: 2, name: "Charging Cable", category: "electronics", price: 10, description: "Fast charging cable.", image: "charging-cable.jpg", rating: 4.0},
+      {id: 3, name: "Ergonomic Keyboard", category: "electronics", price: 75, description: "Comfortable keyboard for long typing.", image: "ergonomic-keyboard.jpg", rating: 5},
+      {id: 4, name: "Gaming Console", category: "electronics", price: 350, description: "Next-gen gaming console.", image: "Gaming-console.jpg", rating: 5},
+      {id: 5, name: "Smart Blender", category: "home", price: 85, description: "High-speed smart blender.", image: "smart-blender.jpg", rating: 4.3},
+      {id: 6, name: "Smart Lightbulb", category: "home", price: 20, description: "Smart LED lightbulb with app control.", image: "smart-lightbulb.jpg", rating: 4.0},
+      {id: 7, name: "Smart Watch", category: "electronics", price: 180, description: "Track your fitness and notifications.", image: "smart-watch.jpg", rating: 5},
+      {id: 8, name: "Wireless Headphone", category: "electronics", price: 90, description: "Noise cancelling wireless headphone.", image: "wireless-headphone.jpg", rating: 4.4},
+      {id: 9, name: "Fitness Tracker", category: "fitness", price: 50, description: "Keep track of your fitness goals.", image: "fitness-tracker.jpg", rating: 4.2},
+      {id: 10, name: "Fitness Tracker Pro", category: "fitness", price: 75, description: "Advanced fitness tracking device.", image: "fitness-tracker.jpg", rating: 5},
+      {id: 11, name: "Smart Thermostat", category: "home", price: 150, description: "Control your home's temperature remotely.", image: "smart-thermostat.jpeg", rating:3},
+      {id: 12, name: "Coffee Maker", category: "home", price: 60, description: "Brew your coffee easily.", image: "coffee-maker.jpg", rating: 4.1},
+      {id: 13, name: "Wireless Mouse", category: "electronics", price: 25, description: "Ergonomic wireless mouse.", image: "wireless-mouse.jpg", rating: 4.0},
+      {id: 14, name: "Yoga Mat", category: "fitness", price: 30, description: "Non-slip yoga mat.", image: "yoga-mat.jpeg", rating: 5},
+      {id: 15, name: "Portable Projector", category: "electronics", price: 200, description: "Project videos anywhere.", image: "portable-projector.jpg", rating: 4.4},
+      {id: 16, name: "Laptop Stand", category: "electronics", price: 40, description: "Adjustable laptop stand.", image: "laptop-stand.jpg", rating: 5},
+      {id: 17, name: "LED Desk Lamp", category: "home", price: 35, description: "Bright LED desk lamp.", image: "led-desk-lamp.jpg", rating: 2},
+      {id: 18, name: "Mirrorless Camera", category: "electronics", price: 550, description: "Compact mirrorless camera.", image: "mirrorless-camera.jpg", rating: 5},
+      {id: 19, name: "Bluetooth Speaker", category: "electronics", price: 55, description: "Portable Bluetooth speaker with great sound.", image: "bluetooth-speaker.jpg", rating: 4.3},
+      {id: 20, name: "Running Shoes", category: "fitness", price: 95, description: "Lightweight running shoes for daily training.", image: "running-shoes.jpg", rating: 5},
+      {id: 21, name: "Pro Django", category: "books", price: 25, description: "Classic guide for django.", image: "pro-django.jpg", rating: 5},
+      {id: 22, name: "Get Coding", category: "books", price: 30, description: "A handbook of agile software craftsmanship.", image: "get-coding.jpg", rating: 5},
+      {id: 23, name: "Men's Casual T-Shirt", category: "clothing", price: 15, description: "100% cotton casual wear.", image: "mens-t-shirt.jpg", rating: 4.2},
+      {id: 24, name: "Women's Denim Jacket", category: "clothing", price: 45, description: "Stylish and comfortable jacket.", image: "womens-denim-jacket.jpg", rating: 3}
 ];
 
 let currentPage = 1;
@@ -297,16 +339,76 @@ function removeFromCart(index) {
   renderCart();
 }
 
+function generateReceipt(order) {
+  const win = window.open('', 'Receipt', 'width=600,height=800');
+  win.document.write(`
+    <html><head><title>Receipt</title></head><body style="font-family:Arial;padding:20px;">
+    <h2>🧾 Purchase Receipt</h2>
+    <p><strong>Date:</strong> ${order.date}</p><hr>
+    <table border="1" cellspacing="0" cellpadding="8" style="width:100%;border-collapse:collapse;">
+      <thead><tr><th>Product</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead>
+      <tbody>
+        ${order.items.map(i => `<tr><td>${i.name}</td><td>${i.quantity}</td><td>£${i.price.toFixed(2)}</td><td>£${i.total}</td></tr>`).join('')}
+      </tbody>
+    </table>
+    <p><strong>Subtotal:</strong> £${order.subtotal}</p>
+    <p><strong>Tax (20%):</strong> £${order.tax}</p>
+    <p><strong>Total:</strong> <b>£${order.total}</b></p>
+    <p><strong>Payment:</strong> ${order.paymentMethod} - ${order.paymentDetails}</p>
+    <p>Thank you for your purchase!</p>
+    </body></html>
+  `);
+  win.document.close();
+  win.print();
+}
+
 document.getElementById('cart-btn').onclick = () => {
   renderCart();
   document.getElementById('cart-modal').style.display = 'flex';
 };
+
 document.getElementById('close-cart').onclick = () => {
   document.getElementById('cart-modal').style.display = 'none';
 };
+
 document.getElementById('checkout-btn').onclick = () => {
-  alert('Checkout not implemented.');
+  const method = document.getElementById('payment-method').value;
+  const details = document.getElementById('payment-details').value.trim();
+
+  if (!details) {
+    alert("Please enter your payment details.");
+    return;
+  }
+
+  const subtotal = cart.reduce((sum, i) => sum + i.product.price * i.quantity, 0);
+  const tax = subtotal * 0.2;
+  const total = subtotal + tax;
+
+  const order = {
+    date: new Date().toLocaleString(),
+    items: cart.map(({ product, quantity }) => ({
+      name: product.name,
+      quantity,
+      price: product.price,
+      total: (product.price * quantity).toFixed(2)
+    })),
+    subtotal: subtotal.toFixed(2),
+    tax: tax.toFixed(2),
+    total: total.toFixed(2),
+    paymentMethod: method,
+    paymentDetails: details
+  };
+
+  let history = JSON.parse(localStorage.getItem('orders') || '[]');
+  history.push(order);
+  localStorage.setItem('orders', JSON.stringify(history));
+
+  generateReceipt(order);
+  cart = [];
+  updateCart();
+  document.getElementById('cart-modal').style.display = 'none';
 };
+
 document.getElementById('cart-modal').addEventListener('click', e => {
   if (e.target.id === 'cart-modal') {
     document.getElementById('cart-modal').style.display = 'none';

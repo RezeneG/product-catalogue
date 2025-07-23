@@ -173,6 +173,21 @@ const defaultProducts = [
   }
 ];
 
+let cart = [];
+
+// Save and load cart (optional - for persistence)
+const CART_KEY = "cart";
+
+function saveCart() {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
+
+function loadCart() {
+  const stored = localStorage.getItem(CART_KEY);
+  if (stored) {
+    cart = JSON.parse(stored);
+  }
+}
 
 function getStoredProducts() {
   try {
@@ -217,7 +232,8 @@ function createProductCard(product) {
     <ul>
       ${(product.reviews || []).map(review => `<li>${review}</li>`).join('')}
     </ul>
-    <button class="add-to-cart">Add to Cart</button>
+   <button class="add-to-cart" data-id="${product.name}">Add to Cart</button>
+
   `;
   return card;
 }
@@ -228,6 +244,14 @@ function displayProducts(productList) {
   productList.forEach(p => {
     container.appendChild(createProductCard(p));
   });
+document.querySelectorAll(".add-to-cart").forEach(button => {
+  button.addEventListener("click", function () {
+    const name = this.dataset.id;
+    const product = products.find(p => p.name === name);
+    if (product) addToCart(product);
+  });
+});
+
 }
 
 const products = loadProducts();
